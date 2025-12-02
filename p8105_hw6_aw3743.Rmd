@@ -1,0 +1,75 @@
+---
+title: "P8105 Homework 6"
+author: "Aisha Waggeh"
+date: "`r Sys.Date()`"
+output: github_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  fig.width = 10,
+  fig.height = 6,
+  fig.path = "figs/",
+  dev = "png"
+)
+
+library(tidyverse)
+library(broom)
+library(modelr)
+library(p8105.datasets)
+
+```
+
+# Problem 1
+```{r}
+# Load and clean homicide data from GitHub
+homicide_df <- read_csv(
+  "https://raw.githubusercontent.com/washingtonpost/data-homicides/master/homicide-data.csv"
+) 
+glimpse(homicide_df)
+
+ homicide_df <- homicide_df %>%
+  mutate(
+    city_state = paste(city, state, sep = ", "),
+    resolved = as.numeric(disposition == "Closed by arrest")
+  ) %>%
+  filter(!city_state %in% c("Dallas, TX", "Phoenix, AZ", "Kansas City, MO", "Tulsa, AL")) %>%
+  filter(victim_race %in% c("White", "Black")) %>%
+  mutate(
+    victim_age = as.numeric(victim_age),
+    victim_race = fct_relevel(victim_race, "White"),
+    victim_sex = fct_relevel(victim_sex, "Female")
+  )
+glimpse(homicide_df)
+
+
+# Check missing values
+missing_summary <- homicide_df %>%
+  summarise(across(everything(), ~sum(is.na(.))))
+
+missing_summary
+```
+
+
+
+
+
+# Problem 2
+
+```{r}
+
+
+```
+
+# Problem 3
+
+
+```{r}
+
+
+```
+
